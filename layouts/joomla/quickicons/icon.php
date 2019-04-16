@@ -28,6 +28,7 @@ if ($id !== '')
 {
 	$class = ($displayData['id'] === 'plg_quickicon_joomlaupdate'
 		|| $displayData['id'] === 'plg_quickicon_extensionupdate'
+		|| $displayData['id'] === 'plg_quickicon_privacycheck'
 		|| $displayData['id'] === 'plg_quickicon_overridecheck') ? ' class="pulse"' : '';
 }
 
@@ -36,15 +37,11 @@ if ($id !== '')
 	<a <?php echo $id . $class; ?> href="<?php echo $displayData['link']; ?>"<?php echo $target . $onclick . $title; ?>>
 
 		<?php if (isset($displayData['amount'])): ?>
+		<div class="quickicon-icon d-flex align-items-end">
+			<span class="quickicon-counter"  data-url="<?php echo 'index.php?option=com_checkin&amp;task=getMenuBadgeData&amp;format=json'; ?>"></span>
+		</div>
 			<div class="quickicon-amount">
-				<?php
-				$amount = (int) $displayData['amount'];
-				if ($amount <  100000):
-					echo $amount;
-				else:
-					echo floor($amount / 1000) . '<span class="thsd">' . $amount % 1000 . '</span>';
-				endif;
-				?>
+				
 			</div>
 		<?php elseif (isset($displayData['image'])): ?>
 			<div class="quickicon-icon d-flex align-items-end">
