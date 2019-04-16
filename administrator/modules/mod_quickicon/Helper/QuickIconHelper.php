@@ -188,7 +188,7 @@ abstract class QuickIconHelper
 				if ($params->get('show_checkin', '1'))
 				{
 					self::$buttons[$key][] = [
-						'amount' => self::countCheckin(),
+						'ajaxurl' => 'index.php?option=com_checkin&amp;task=getMenuBadgeData&amp;format=json',
 						'link'   => Route::_('index.php?option=com_checkin'),
 						'text'   => Text::_('MOD_QUICKICON_CHECKINS'),
 						'access' => array('core.admin', 'com_checkin'),
@@ -222,6 +222,7 @@ abstract class QuickIconHelper
 				{
 					$default = array(
 						'amount' => null,
+						'ajaxurl' => null,
 						'link'   => null,
 						'addwhat'   => null,
 						'linkadd'   => null,
