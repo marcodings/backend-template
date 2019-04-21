@@ -391,22 +391,6 @@ abstract class QuickIconHelper
 	}
 
 	/**
-	 * Method to get checkin
-	 * 
-	 * @return  integer  The amount of checkins
-	 *
-	 * @since   4.0
-	 */
-	private static function countCheckin()
-	{
-		$app = Factory::getApplication();
-
-		$model = $app->bootComponent('com_checkin')->getMVCFactory()->createModel('Checkin', 'Administrator', ['ignore_request' => true]);
-
-		return $model->getTotal();
-	}
-
-	/**
 	 * Method to get Templates
 	 * 
 	 * @return  integer  The amount of Templates
