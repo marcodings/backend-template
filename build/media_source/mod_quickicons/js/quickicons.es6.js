@@ -12,7 +12,7 @@
 
     // Get the elements
     const elements = [].slice.call(document.querySelectorAll('.quickicon-counter'));
-console.log(elements);
+
     if (elements.length) {
       elements.forEach((element) => {
         const iconurl = element.getAttribute('data-url');
