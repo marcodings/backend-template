@@ -55,13 +55,22 @@ class HtmlView extends BaseHtmlView
 	public function display($tpl = null)
 	{
 		$app = Factory::getApplication();
+		$dashboard = $app->input->getCmd('dashboard');
 
+		if (!empty($dashboard) && $dashboard !== 'components')
+		{
+			// Load language
+			$lang = Factory::getLanguage();
+			$lang->load('com_' . $dashboard, JPATH_ADMINISTRATOR);
+		}
+		
+		$title = !empty($dashboard) ? Text::_(strtoupper('com_' . $dashboard)) : '';
+		
 		// Set toolbar items for the page
-		ToolbarHelper::title(Text::_('COM_CPANEL'), 'home-2 cpanel');
+		ToolbarHelper::title(Text::_('COM_CPANEL') . ' ' . Text::_($title), 'home-2 cpanel');
 		ToolbarHelper::help('screen.cpanel');
 
 		// Display the cpanel modules
-		$dashboard = $app->input->getCmd('dashboard');
 		$this->position = $dashboard ? 'cpanel-' . $dashboard : 'cpanel';
 		$this->modules = ModuleHelper::getModules($this->position);
 
