@@ -55,26 +55,39 @@ class HtmlView extends BaseHtmlView
 	public function display($tpl = null)
 	{
 		$app = Factory::getApplication();
-		$dashboard = $app->input->getCmd('dashboard');
+		$extension = $app->input->getCmd('dashboard');
+		$title = ''; 
 
-		if (!empty($dashboard) && $dashboard !== 'components')
+		if (!empty($extension))
 		{
-			// Load language
+			$sections = explode('.', $extension);
+
+			$component= 'com_' . str_replace('com_', '', $sections[0]);
+
 			$lang = Factory::getLanguage();
-			$lang->load('com_' . $dashboard, JPATH_ADMINISTRATOR);
+			$lang->load($component, JPATH_BASE, null, false, true)
+			|| $lang->load($component, JPATH_ADMINISTRATOR . '/components/' . $component, null, false, true);
+
+			$key = strtoupper($component);
+			$title = $lang->hasKey($key) ? Text::_($key) : '';
+
+			if (!empty($section[1]))
+			{
+				$key = strtoupper($component) . '_' . strtoupper($sections[1]) . '_DASHBOARD_TITLE';
+				
+				$title = $lang->hasKey($key) ? Text::_($key) : '';
+			}
 		}
 
-		$title = !empty($dashboard) ?  ' '  . Text::_(strtoupper('com_' . $dashboard)) : '';
-
 		// Set toolbar items for the page
-		ToolbarHelper::title(Text::_('COM_CPANEL') . Text::_($title), 'home-2 cpanel');
+		ToolbarHelper::title(Text::_('COM_CPANEL') . ' ' . $title, 'home-2 cpanel');
 		ToolbarHelper::help('screen.cpanel');
 
 		// Display the cpanel modules
-		$this->position = $dashboard ? 'cpanel-' . $dashboard : 'cpanel';
+		$this->position = $extension ? 'cpanel-' . $extension : 'cpanel';
 		$this->modules = ModuleHelper::getModules($this->position);
 
-		$quickicons = $dashboard ? 'icon-' . $dashboard : 'icon';
+		$quickicons = $extension ? 'icon-' . $extension : 'icon';
 		$this->quickicons = ModuleHelper::getModules($quickicons);
 
 		parent::display($tpl);
