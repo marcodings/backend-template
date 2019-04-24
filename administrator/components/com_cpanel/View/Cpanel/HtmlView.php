@@ -58,21 +58,26 @@ class HtmlView extends BaseHtmlView
 		$extension = $app->input->getCmd('dashboard');
 		$title = ''; 
 
+		// Generate a title for the view cPanel
+		$sections = explode('.', $extension);
+
 		if (!empty($extension))
 		{
-			$sections = explode('.', $extension);
-
+			// Title should include the name of the component.  
 			$component= 'com_' . str_replace('com_', '', $sections[0]);
-
+			
+			// Try to find a language string for the component in the respective language file
 			$lang = Factory::getLanguage();
 			$lang->load($component, JPATH_BASE, null, false, true)
 			|| $lang->load($component, JPATH_ADMINISTRATOR . '/components/' . $component, null, false, true);
 
 			$key = strtoupper($component);
 			$title = $lang->hasKey($key) ? Text::_($key) : '';
-
+			
+			// A section can follow the component name, i.e. com_content.workflow
 			if (!empty($section[1]))
 			{
+				// Language key then supposed to be COM_CONTENT_WORKFLOW_DASHBOARD_TITLE
 				$key = strtoupper($component) . '_' . strtoupper($sections[1]) . '_DASHBOARD_TITLE';
 				
 				$title = $lang->hasKey($key) ? Text::_($key) : '';
@@ -84,10 +89,10 @@ class HtmlView extends BaseHtmlView
 		ToolbarHelper::help('screen.cpanel');
 
 		// Display the cpanel modules
-		$this->position = $extension ? 'cpanel-' . $extension : 'cpanel';
+		$this->position = $sections[0] ? 'cpanel-' . $sections[0] : 'cpanel';
 		$this->modules = ModuleHelper::getModules($this->position);
 
-		$quickicons = $extension ? 'icon-' . $extension : 'icon';
+		$quickicons = $sections[0] ? 'icon-' . $sections[0] : 'icon';
 		$this->quickicons = ModuleHelper::getModules($quickicons);
 
 		parent::display($tpl);
