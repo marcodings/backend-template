@@ -56,43 +56,45 @@ class HtmlView extends BaseHtmlView
 	{
 		$app = Factory::getApplication();
 		$extension = $app->input->getCmd('dashboard');
-		$title = ''; 
+
+		$position = str_replace('.', '-', $extension);
 
 		// Generate a title for the view cPanel
-		$sections = explode('.', $extension);
+		$parts = explode('.', $extension);
 
-		if (!empty($extension))
+		$component= 'com_' . str_replace('com_', '', $parts[0]);
+		$section = !empty($parts[1]) ? $parts[1] : '';
+
+		// Need to load the language file 
+		$lang = Factory::getLanguage();
+		$lang->load($component, JPATH_BASE, null, false, true)
+		|| $lang->load($component, JPATH_ADMINISTRATOR . '/components/' . $component, null, false, true);
+
+		// Search for a component title
+		if ($lang->hasKey($component_title_key = strtoupper($component . ($section ? "_$section" : '_DASHBOARD_TITLE'))))
 		{
-			// Title should include the name of the component.  
-			$component= 'com_' . str_replace('com_', '', $sections[0]);
-			
-			// Try to find a language string for the component in the respective language file
-			$lang = Factory::getLanguage();
-			$lang->load($component, JPATH_BASE, null, false, true)
-			|| $lang->load($component, JPATH_ADMINISTRATOR . '/components/' . $component, null, false, true);
-
-			$key = strtoupper($component);
-			$title = $lang->hasKey($key) ? Text::_($key) : '';
-			
-			// A section can follow the component name, i.e. com_content.workflow
-			if (!empty($section[1]))
-			{
-				// Language key then supposed to be COM_CONTENT_WORKFLOW_DASHBOARD_TITLE
-				$key = strtoupper($component) . '_' . strtoupper($sections[1]) . '_DASHBOARD_TITLE';
-				
-				$title = $lang->hasKey($key) ? Text::_($key) : '';
-			}
+			$title = Text::_($component_title_key);
+		}
+		elseif ($lang->hasKey($component_section_key = strtoupper($component . ($section ? "_$section" : ''))))
+		// Else if the component section string exits, let's use it
+		{
+			$title = Text::sprintf('COM_CPANEL_DASHBOARD_TITLE', $this->escape(Text::_($component_section_key)));
+		}
+		else
+		// Else use the base title
+		{
+			$title = Text::_('COM_CPANEL_DASHBOARD_BASE_TITLE');
 		}
 
 		// Set toolbar items for the page
-		ToolbarHelper::title(Text::_('COM_CPANEL') . ' ' . $title, 'home-2 cpanel');
+		ToolbarHelper::title(Text::_($title, 'home-2 cpanel'));
 		ToolbarHelper::help('screen.cpanel');
 
 		// Display the cpanel modules
-		$this->position = $sections[0] ? 'cpanel-' . $sections[0] : 'cpanel';
+		$this->position = $position ? 'cpanel-' . $position : 'cpanel';
 		$this->modules = ModuleHelper::getModules($this->position);
 
-		$quickicons = $sections[0] ? 'icon-' . $sections[0] : 'icon';
+		$quickicons = $position ? 'icon-' . $position : 'icon';
 		$this->quickicons = ModuleHelper::getModules($quickicons);
 
 		parent::display($tpl);
