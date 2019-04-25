@@ -57,35 +57,41 @@ class HtmlView extends BaseHtmlView
 		$app = Factory::getApplication();
 		$extension = $app->input->getCmd('dashboard');
 
+		$title = Text::_('COM_CPANEL_DASHBOARD_BASE_TITLE');
+
 		$position = str_replace('.', '-', $extension);
 
 		// Generate a title for the view cPanel
-		$parts = explode('.', $extension);
-
-		$component= 'com_' . str_replace('com_', '', $parts[0]);
-		$section = !empty($parts[1]) ? $parts[1] : '';
-
-		// Need to load the language file 
-		$lang = Factory::getLanguage();
-		$lang->load($component, JPATH_BASE, null, false, true)
-		|| $lang->load($component, JPATH_ADMINISTRATOR . '/components/' . $component, null, false, true);
-
-		// Search for a component title
-		if ($lang->hasKey($component_title_key = strtoupper($component . ($section ? "_$section" : '_DASHBOARD_TITLE'))))
+		if (!empty($extension))
 		{
-			$title = Text::_($component_title_key);
-		}
-		elseif ($lang->hasKey($component_section_key = strtoupper($component . ($section ? "_$section" : ''))))
-		// Else if the component section string exits, let's use it
-		{
-			$title = Text::sprintf('COM_CPANEL_DASHBOARD_TITLE', $this->escape(Text::_($component_section_key)));
-		}
-		else
-		// Else use the base title
-		{
-			$title = Text::_('COM_CPANEL_DASHBOARD_BASE_TITLE');
-		}
+			$parts = explode('.', $extension);
 
+			$prefix = 'COM_CPANEL_DASHBOARD_';
+			$lang = Factory::getLanguage();
+
+			If (strpos($parts[0], 'com_') === false) 
+			{
+				$prefix .= strtoupper($parts[0]);
+			}
+			else 
+			{
+				$prefix = strtoupper($parts[0]) . '_DASHBOARD';
+				// Need to load the language file 
+				$lang->load($parts[0], JPATH_BASE, null, false, true)
+				|| $lang->load($parts[0], JPATH_ADMINISTRATOR . '/components/' . $parts[0], null, false, true);
+				$lang->load($parts[0]);
+			}
+
+			$sectionkey =  isset($parts[1]) && !empty($parts[1]) ?   '_' . strtoupper($parts[1]) : '';
+			$key = $prefix . $sectionkey .  '_TITLE';
+
+			// Search for a component title
+			if ($lang->hasKey($key))
+			{
+				$title = Text::_($key);
+			}
+		}
+		
 		// Set toolbar items for the page
 		ToolbarHelper::title(Text::_($title, 'home-2 cpanel'));
 		ToolbarHelper::help('screen.cpanel');
