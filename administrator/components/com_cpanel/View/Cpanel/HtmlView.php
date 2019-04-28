@@ -85,7 +85,7 @@ class HtmlView extends BaseHtmlView
 			}
 
 			$sectionkey = !empty($parts[1]) ?   '_' . strtoupper($parts[1]) : '';
-			$key = $prefix . $sectionkey .  '_TITLE';
+			$key = $prefix . $sectionkey . '_TITLE';
 
 			// Search for a component title
 			if ($lang->hasKey($key))
