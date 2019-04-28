@@ -77,13 +77,14 @@ class HtmlView extends BaseHtmlView
 			else 
 			{
 				$prefix = strtoupper($parts[0]) . '_DASHBOARD';
+
 				// Need to load the language file 
 				$lang->load($parts[0], JPATH_BASE, null, false, true)
 				|| $lang->load($parts[0], JPATH_ADMINISTRATOR . '/components/' . $parts[0], null, false, true);
 				$lang->load($parts[0]);
 			}
 
-			$sectionkey =  !empty($parts[1]) ?   '_' . strtoupper($parts[1]) : '';
+			$sectionkey = !empty($parts[1]) ?   '_' . strtoupper($parts[1]) : '';
 			$key = $prefix . $sectionkey .  '_TITLE';
 
 			// Search for a component title
