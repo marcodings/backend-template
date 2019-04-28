@@ -60,8 +60,8 @@ class HtmlView extends BaseHtmlView
 
 		$title = Text::_('COM_CPANEL_DASHBOARD_BASE_TITLE');
 
-		$position = str_replace('.', '-', $extension);
-
+		$position = ApplicationHelper::stringURLSafe('components.workflow');
+echo $position;
 		// Generate a title for the view cPanel
 		if (!empty($extension))
 		{
