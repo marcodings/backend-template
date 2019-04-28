@@ -11,6 +11,7 @@ namespace Joomla\Component\Cpanel\Administrator\View\Cpanel;
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\CMS\Language\Text;
@@ -55,7 +56,7 @@ class HtmlView extends BaseHtmlView
 	public function display($tpl = null)
 	{
 		$app = Factory::getApplication();
-		$extension = $app->input->getCmd('dashboard');
+		$extension = ApplicationHelper::stringURLSafe($app->input->getCmd('dashboard'));
 
 		$title = Text::_('COM_CPANEL_DASHBOARD_BASE_TITLE');
 
@@ -69,7 +70,7 @@ class HtmlView extends BaseHtmlView
 			$prefix = 'COM_CPANEL_DASHBOARD_';
 			$lang = Factory::getLanguage();
 
-			If (strpos($parts[0], 'com_') === false) 
+			if (strpos($parts[0], 'com_') === false) 
 			{
 				$prefix .= strtoupper($parts[0]);
 			}
@@ -82,7 +83,7 @@ class HtmlView extends BaseHtmlView
 				$lang->load($parts[0]);
 			}
 
-			$sectionkey =  isset($parts[1]) && !empty($parts[1]) ?   '_' . strtoupper($parts[1]) : '';
+			$sectionkey =  !empty($parts[1]) ?   '_' . strtoupper($parts[1]) : '';
 			$key = $prefix . $sectionkey .  '_TITLE';
 
 			// Search for a component title
@@ -91,7 +92,7 @@ class HtmlView extends BaseHtmlView
 				$title = Text::_($key);
 			}
 		}
-		
+
 		// Set toolbar items for the page
 		ToolbarHelper::title(Text::_($title, 'home-2 cpanel'));
 		ToolbarHelper::help('screen.cpanel');
