@@ -31,11 +31,81 @@
 					default="mod_quickicon"
 				/>
 				<field
+					name="show_update_joomla"
+					type="radio"
+					class="switcher"
+					label="MOD_QUICKICON_SHOW_UPDATE_JOOMLA_LABEL"
+					default="0"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field
+					name="show_extensionupdate"
+					type="radio"
+					class="switcher"
+					label="MOD_QUICKICON_SHOW_EXTENSION_CHECK_LABEL"
+					default="0"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field
+					name="show_override_check"
+					type="radio"
+					class="switcher"
+					label="MOD_QUICKICON_SHOW_OVERRIDE_CHECK_LABEL"
+					default="0"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field
+					name="show_privacy_requests"
+					type="radio"
+					class="switcher"
+					label="MOD_QUICKICON_SHOW_PRIVACY_REQUESTS_LABEL"
+					default="0"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field
 					name="show_global"
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_GLOBAL_LABEL"
-					default="1"
+					default="0"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field
+					name="show_extensions"
+					type="radio"
+					class="switcher"
+					label="MOD_QUICKICON_SHOW_EXTENSIONS_LABEL"
+					default="0"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field> 
+				<field
+					name="show_checkin"
+					type="radio"
+					class="switcher"
+					label="MOD_QUICKICON_SHOW_CHECKIN_LABEL"
+					default="0"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				<field
+					name="show_cache"
+					type="radio"
+					class="switcher"
+					label="MOD_QUICKICON_SHOW_CACHE_LABEL"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -45,7 +115,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_USERS_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -55,7 +125,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_ARTICLES_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -65,7 +135,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_CATEGORIES_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -75,17 +145,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_MEDIA_LABEL"
-					default="1"
-					>
-					<option value="0">JHIDE</option>
-					<option value="1">JSHOW</option>
-				</field>
-				<field
-					name="show_checkin"
-					type="radio"
-					class="switcher"
-					label="MOD_QUICKICON_SHOW_CHECKINS_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -95,7 +155,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_MENUITEMS_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -105,7 +165,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_MODULES_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -115,7 +175,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_PLUGINS_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -125,7 +185,7 @@
 					type="radio"
 					class="switcher"
 					label="MOD_QUICKICON_SHOW_TEMPLATES_LABEL"
-					default="1"
+					default="0"
 					>
 					<option value="0">JHIDE</option>
 					<option value="1">JSHOW</option>
@@ -150,7 +210,7 @@
 					name="cache"
 					type="list"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
-					default="1"
+					default="0"
 					filter="integer"
 					>
 					<option value="1">JGLOBAL_USE_GLOBAL</option>
