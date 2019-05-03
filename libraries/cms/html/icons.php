@@ -32,10 +32,13 @@ abstract class JHtmlIcons
 	public static function buttons($buttons)
 	{
 		$html = array();
-
-		foreach ($buttons as $button)
+		
+		if (!empty($buttons))
 		{
-			$html[] = HTMLHelper::_('icons.button', $button);
+			foreach ($buttons as $button)
+			{
+				$html[] = HTMLHelper::_('icons.button', $button);
+			}
 		}
 
 		return implode($html);
