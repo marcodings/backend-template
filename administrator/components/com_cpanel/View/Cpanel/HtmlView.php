@@ -102,9 +102,6 @@ class HtmlView extends BaseHtmlView
 		$this->position = $position ? 'cpanel-' . $position : 'cpanel';
 		$this->modules = ModuleHelper::getModules($this->position);
 
-		$quickicons = $position ? 'icon-' . $position : 'icon';
-		$this->quickicons = ModuleHelper::getModules($quickicons);
-
 		parent::display($tpl);
 	}
 }

@@ -41,25 +41,15 @@ echo HTMLHelper::_(
 	)
 );
 ?>
-<?php if ($this->quickicons) : ?>
-<div class="row">
-    	<?php
-		// Display the icon position modules
-		foreach ($this->quickicons as $iconmodule)
-		{
-			echo ModuleHelper::renderModule($iconmodule, array('style' => 'well'));
-		}
-	?>
-</div>
-<?php endif; ?>
+
 <div id="cpanel-modules" class="row">
 	<?php
-	foreach ($this->modules as $module)
-	{
-		echo ModuleHelper::renderModule($module, array('style' => 'well'));
-	}
+		foreach ($this->modules as $module)
+		{
+			echo ModuleHelper::renderModule($module, array('style' => 'well'));
+		}
+		if ($user->authorise('core.create', 'com_modules')) : 
 	?>
-	<?php if ($user->authorise('core.create', 'com_modules')) : ?>
 </div>
 <div class="row">
 	<div class="col-md-6">
