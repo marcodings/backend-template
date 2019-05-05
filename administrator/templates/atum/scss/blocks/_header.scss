@@ -6,6 +6,7 @@
   background: $white;
   box-shadow: $atum-box-shadow;
   z-index: $zindex-header;
+  border-top: 3px solid var(--atum-bg-dark);
 
   @include media-breakpoint-down(lg) {
     .align-items-center{
@@ -53,6 +54,7 @@
 
     [class^='icon-'] {
       margin-right: 10px;
+      font-size: 1rem;
     }
     @include media-breakpoint-down(md){
       width: 160px;
@@ -109,8 +111,6 @@
     }
 
     &:hover .fa {
-      font-size: 1.3rem;
-      transition: all .2s ease-in-out;
       color: var(--atum-text-light);
     }
   }
@@ -148,11 +148,6 @@
       a {
         padding-left: 0;
       }
-
-      .fa {
-        float: left;
-        margin-right: 0.75rem;
-      }
     }
 
     .dropdown-header {
@@ -180,29 +175,11 @@
         text-decoration: none;
         background: var(--atum-bg-dark);
       }
-
-      .fa {
-        float: right;
-      }
     }
 
     .fa {
       padding: 1rem;
       width: 3rem;
-    }
-
-    .close-message {
-      float: right;
-      padding: 0;
-      width: 3rem;
-    }
-
-    &.message-wrapper > a:first-child {
-      width: calc(100% - 3.5rem);
-    }
-
-    &.dropdown-message > a {
-      padding-left: 0;
     }
   }
 
@@ -274,9 +251,6 @@
         color:var(--atum-text-light);
       }
 
-      &:before{
-        color:var(--atum-text-light);
-      }
     }
   }
 }

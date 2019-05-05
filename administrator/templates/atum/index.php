@@ -49,6 +49,7 @@ HTMLHelper::_('stylesheet', 'administrator/language/' . $lang->getTag() . '/' . 
 // Load specific template related JS
 // TODO: Adapt refactored build tools pt.2 @see https://issues.joomla.org/tracker/joomla-cms/23786
 HTMLHelper::_('script', 'media/templates/' . $this->template . '/js/template.min.js', ['version' => 'auto']);
+HTMLHelper::_('script', 'media/vendor/focus-visible/js/focus-visible.min.js', ['version' => 'auto']);
 
 // Set some meta data
 $this->setMetaData('viewport', 'width=device-width, initial-scale=1');
@@ -218,9 +219,6 @@ $this->addStyleDeclaration($css);
                   </a>
                 </div>
                 <jdoc:include type="modules" name="menu" style="none"/>
-			    <div id="main-brand" class="main-brand d-flex align-items-center justify-content-center">
-				    <img src="<?php echo $joomlaLogo; ?>" alt="">
-			    </div>
             </div>
 		</div>
 	<?php endif; ?>

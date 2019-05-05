@@ -1,7 +1,5 @@
 // Form
 
-@import "../variables";
-
 .form-control {
   max-width: $input-max-width;
   background-color: var(--white-offset);
@@ -55,7 +53,6 @@
   hr {
     width: 380px;
   }
-
   label {
     width: 440px;
   }
@@ -68,8 +65,6 @@ td .form-control {
 
 legend {
   margin-bottom: 1.1rem;
-  font-size: 1rem;
-  font-weight: $font-weight-normal;
 }
 
 .checkboxes {
@@ -106,21 +101,4 @@ legend {
 
 [aria-grabbed='true'] {
   box-shadow: 0 0 2px 1px theme-color("primary");
-}
-
-@include media-breakpoint-down(xs) {
-  .control-group {
-    .control-label{
-      float:none;
-      width:95%;
-    }
-    .controls{
-      margin-left:0;
-      .form-control,
-      .custom-select{
-        max-width:90%;
-      }
-    }
-  }
-
 }

@@ -69,12 +69,12 @@ $userId = $user->id;
 						</caption>
 						<thead>
 							<tr>
-								<th scope="col" style="width:1%" class="text-center hidden-sm-down">
-									<?php echo HTMLHelper::_('searchtools.sort', '', 'w.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
-								</th>
 								<td style="width:1%" class="text-center hidden-sm-down">
 									<?php echo HTMLHelper::_('grid.checkall'); ?>
 								</td>
+								<th scope="col" style="width:1%" class="text-center hidden-sm-down">
+									<?php echo HTMLHelper::_('searchtools.sort', '', 'w.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
+								</th>
 								<th scope="col"  style="width:1%" class="text-center hidden-sm-down">
 									<?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'w.condition', $listDirn, $listOrder); ?>
 								</th>
@@ -110,6 +110,9 @@ $userId = $user->id;
 							?>
 							<tr class="row<?php echo $i % 2; ?>" data-dragable-group="0">
 								<td class="order text-center hidden-sm-down">
+									<?php echo HTMLHelper::_('grid.id', $i, $item->id); ?>
+								</td>
+								<td class="order text-center hidden-sm-down">
 									<?php
 									$iconClass = '';
 									if (!$canChange)
@@ -122,14 +125,11 @@ $userId = $user->id;
 									}
 									?>
 									<span class="sortable-handler<?php echo $iconClass ?>">
-										<span class="icon-menu" aria-hidden="true"></span>
+										<span class="fa fa-ellipsis-v" aria-hidden="true"></span>
 									</span>
 									<?php if ($canChange && $saveOrder) : ?>
 										<input type="text" style="display:none" name="order[]" size="5" value="<?php echo $item->ordering; ?>" class="width-20 text-area-order">
 									<?php endif; ?>
-								</td>
-								<td class="order text-center hidden-sm-down">
-									<?php echo HTMLHelper::_('grid.id', $i, $item->id); ?>
 								</td>
 								<td class="text-center">
 									<div class="btn-group">
@@ -138,9 +138,8 @@ $userId = $user->id;
 								</td>
 								<th scope="row">
 									<?php if (!$isCore && ($canEdit || $canEditOwn)) : ?>
-										<?php $editIcon = '<span class="fa fa-pencil-square mr-2" aria-hidden="true"></span>'; ?>
 										<a href="<?php echo $edit; ?>" title="<?php echo Text::_('JACTION_EDIT', true); ?> <?php echo Text::_($item->title, true); ?>">
-											<?php echo $editIcon; ?><?php echo $this->escape(Text::_($item->title)); ?>
+											<?php echo $this->escape(Text::_($item->title)); ?>
 										</a>
 										<div class="small"><?php echo $item->description; ?></div>
 									<?php else: ?>

@@ -46,8 +46,7 @@ button,
 input,
 textarea {
 
-  &:focus,
-  &:-moz-focusring {
+  &.focus-visible {
   outline: auto 2px var(--focus);
   }
 }
@@ -84,17 +83,30 @@ caption {
   padding-bottom: 50px;
 }
 
-.container-main {
+body .container-main {
   position: relative;
   min-height: calc(100vh - #{$header-height});
   background-color: var(--atum-bg-light);
-}
+  padding-left: 0;
+  padding-right: 0;
 
-.list-view-main {
+	&:before, &:after {
+		content: '';
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		background-color: var(--atum-bg-light);
+		background-image: url(../images/joomla-pattern-gray.svg);
+	}
 
-  .container-main {
-    background-color: var(--atum-bg-light);
-  }
+	&:after {
+		background: -moz-linear-gradient(-45deg, var(--atum-bg-light) 0%, var(--atum-bg-light) 20%, rgba(225, 229, 231, 0) 100%);
+		background: -webkit-linear-gradient(-45deg, var(--atum-bg-light) 0%, var(--atum-bg-light) 20%, rgba(225, 229, 231, 0) 100%);
+		background: linear-gradient(135deg, var(--atum-bg-light) 0%, var(--atum-bg-light) 20%, rgba(225, 229, 231, 0) 100%);
+	}
 }
 
 .content {
@@ -112,7 +124,7 @@ caption {
 }
 
 .row-selected {
-  background-color: var(--row-selected);
+  background-color: var(--toolbar-bg);
 }
 
 // Chosen (TEMPORARY)
